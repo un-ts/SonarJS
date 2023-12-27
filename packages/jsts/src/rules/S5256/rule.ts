@@ -23,7 +23,7 @@ import getElementType from 'eslint-plugin-jsx-a11y/lib/util/getElementType';
 import * as estree from 'estree';
 import { Rule } from 'eslint';
 import { TSESTree } from '@typescript-eslint/utils';
-import { getProp, getLiteralPropValue } from 'jsx-ast-utils';
+import jsxAstUtils from 'jsx-ast-utils';
 import { computeGrid } from '../helpers/table';
 import { isPresentationTable } from '../helpers';
 
@@ -59,8 +59,8 @@ export const rule: Rule.RuleModule = {
           if (isPresentationTable(context, tree.openingElement)) {
             return;
           }
-          const ariaHidden = getProp(tree.openingElement.attributes, 'aria-hidden');
-          if (ariaHidden && getLiteralPropValue(ariaHidden) === true) {
+          const ariaHidden = jsxAstUtils.getProp(tree.openingElement.attributes, 'aria-hidden');
+          if (ariaHidden && jsxAstUtils.getLiteralPropValue(ariaHidden) === true) {
             return;
           }
           if (!checkValidTable(tree)) {

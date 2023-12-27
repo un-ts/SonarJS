@@ -20,11 +20,11 @@
 // https://sonarsource.github.io/rspec/#/rspec/S6957/javascript
 
 import { Rule } from 'eslint';
-import { rules } from 'eslint-plugin-react';
+import react from 'eslint-plugin-react';
 import { getNearestPackageJsons } from '@sonar/jsts';
 import type { RuleModule } from '../../../../shared/src/types/rule';
 
-const reactNoDeprecated = rules['no-deprecated'];
+const reactNoDeprecated = react.rules['no-deprecated'];
 
 export const rule: RuleModule = {
   meta: {

@@ -19,7 +19,7 @@
  */
 
 import { TSESTree } from '@typescript-eslint/utils';
-import { getLiteralPropValue, getProp } from 'jsx-ast-utils';
+import jsxAstUtils from 'jsx-ast-utils';
 import { Rule } from 'eslint';
 import getElementType from 'eslint-plugin-jsx-a11y/lib/util/getElementType';
 import { isHtmlElement } from './isHtmlElement';
@@ -42,9 +42,9 @@ const KNOWN_TABLE_STRUCTURE_ELEMENTS = ['thead', 'tbody', 'tfoot'];
 
 function computeSpan(tree: TSESTree.JSXElement, spanKey: string): number {
   let span = 1;
-  const spanAttr = getProp(tree.openingElement.attributes, spanKey);
+  const spanAttr = jsxAstUtils.getProp(tree.openingElement.attributes, spanKey);
   if (spanAttr) {
-    span = parseInt(String(getLiteralPropValue(spanAttr)));
+    span = parseInt(String(jsxAstUtils.getLiteralPropValue(spanAttr)));
   }
   return span;
 }
@@ -66,9 +66,9 @@ function colSpan(tree: TSESTree.JSXElement): number {
 }
 
 function getHeaders(tree: TSESTree.JSXElement): string[] | undefined {
-  const headers = getProp(tree.openingElement.attributes, 'headers');
+  const headers = jsxAstUtils.getProp(tree.openingElement.attributes, 'headers');
   if (headers) {
-    const headerVal = getLiteralPropValue(headers);
+    const headerVal = jsxAstUtils.getLiteralPropValue(headers);
     if (headerVal && String(headerVal).trim() !== '') {
       return String(headerVal).split(/\s+/);
     }
@@ -77,9 +77,9 @@ function getHeaders(tree: TSESTree.JSXElement): string[] | undefined {
 }
 
 function getID(tree: TSESTree.JSXElement): string | undefined {
-  const id = getProp(tree.openingElement.attributes, 'id');
+  const id = jsxAstUtils.getProp(tree.openingElement.attributes, 'id');
   if (id) {
-    return String(getLiteralPropValue(id));
+    return String(jsxAstUtils.getLiteralPropValue(id));
   }
   return undefined;
 }

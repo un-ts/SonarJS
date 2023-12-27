@@ -20,14 +20,14 @@
 // https://sonarsource.github.io/rspec/#/rspec/S6747/javascript
 
 import { Rule } from 'eslint';
-import { rules as reactRules } from 'eslint-plugin-react';
-import { rules as jsxA11yRules } from 'eslint-plugin-jsx-a11y';
+import react from 'eslint-plugin-react';
+import jsxA11y from 'eslint-plugin-jsx-a11y';
 import { interceptReport, mergeRules } from '../helpers';
 import { decorate } from './decorator';
 import { TSESTree } from '@typescript-eslint/utils';
 import type { RuleModule } from '../../../../shared/src/types/rule';
 
-const noUnkownProp = reactRules['no-unknown-property'];
+const noUnkownProp = react.rules['no-unknown-property'];
 const decoratedNoUnkownProp = decorate(noUnkownProp);
 
 /**
@@ -42,7 +42,7 @@ const decoratedNoUnkownProp = decorate(noUnkownProp);
  */
 const flaggedNodeStarts = new Map();
 
-const ariaPropsRule = jsxA11yRules['aria-props'];
+const ariaPropsRule = jsxA11y.rules['aria-props'];
 const decoratedAriaPropsRule = interceptReport(ariaPropsRule, (context, descriptor) => {
   if ('node' in descriptor) {
     const start = (descriptor.node as TSESTree.Node).range[0];
