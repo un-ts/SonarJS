@@ -17,8 +17,8 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-import { Linter } from 'eslint';
+import { builtinRules } from 'eslint/use-at-your-own-risk';
 /**
  * ESLint core rules.
  */
-export const eslintRules = Object.fromEntries(new Linter().getRules());
+export const eslintRules = Object.fromEntries(builtinRules);
